@@ -39,6 +39,8 @@ const getFollowing = (request, response) => {
           throw error;
         }
 
+        console.log('UserId: ' + id);
+
         response.status(200).json(results.rows);
       });
 
