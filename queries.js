@@ -1,5 +1,6 @@
 
 const Pool = require('pg').Pool
+const cassandra = require('cassandra-driver');
 const pool = new Pool({
   host: 'event-io.cxbutbbhppuw.us-east-1.rds.amazonaws.com',
   user: 'bootymage69',
@@ -8,10 +9,24 @@ const pool = new Pool({
   port: 5432
 })
 
+const client = new cassandra.Client({ contactPoints: ['3.229.137.212'], localDataCenter: 'datacenter1' });
+
 const getFollowing = (request, response) => {
 
 
     const id = request.params.id;
+
+    client.connect()
+  .then(function () {
+    console.log('Connected to cluster with %d host(s): %j', client.hosts.length, client.hosts.keys());
+    console.log('Keyspaces: %j', Object.keys(client.metadata.keyspaces));
+    console.log('Shutting down');
+    return client.shutdown();
+  })
+  .catch(function (err) {
+    console.error('There was an error when connecting', err);
+    return client.shutdown().then(() => { throw err; });
+  });
 
 
       var query_following =
