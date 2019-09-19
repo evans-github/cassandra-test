@@ -1,4 +1,3 @@
-var validate = require('uuid-validate');
 
 const Pool = require('pg').Pool
 const pool = new Pool({
@@ -14,7 +13,7 @@ const getFollowing = (request, response) => {
 
     const id = request.params.id;
 
-    if(validate(id)){
+
       var query_following =
       `SELECT f.following_id, u.username, u.name, u.profile_pic FROM table_following f
       LEFT JOIN users u ON
@@ -27,9 +26,7 @@ const getFollowing = (request, response) => {
 
         response.status(200).json(results.rows);
       });
-    }else{
-      response.status(404).send('Invalid query parameters');
-    }
+
 
 
 };
