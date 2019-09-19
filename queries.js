@@ -16,6 +16,8 @@ const getFollowing = (request, response) => {
 
     const id = request.params.id;
 
+    console.log('UserId: ' + id);
+
     client.connect()
   .then(function () {
     console.log('Connected to cluster with %d host(s): %j', client.hosts.length, client.hosts.keys());
@@ -39,7 +41,7 @@ const getFollowing = (request, response) => {
           throw error;
         }
 
-        console.log('UserId: ' + id);
+
 
         response.status(200).json(results.rows);
       });
