@@ -44,7 +44,8 @@ const getFollowing = (request, response) => {
           throw error;
         }
 
-        response.status(200).json(results.rows);
+        console.log("Results: " + JSON.stringify(results));
+        //response.status(200).json(results.rows);
       });
 
 
