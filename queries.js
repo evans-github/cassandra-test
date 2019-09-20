@@ -8,7 +8,7 @@ const getFollowing = (request, response) => {
 
 
   const id = request.params.id;
-  console.console.log("UserId: " + id);
+  console.log("UserId: " + id);
 
   client.connect()
   .then(function () {
