@@ -23,6 +23,7 @@ const getFollowing = (request, response) => {
   .then(function (result) {
     const row = result.rows[0];
     console.log('Obtained row: ', row);
+    response.status(200).json(result.row);
   })
   .catch(function (err) {
     console.error('There was an error when connecting', err);
