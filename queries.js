@@ -1,5 +1,6 @@
 
 const Pool = require('pg').Pool
+const cassandra = require('cassandra-driver');
 const pool = new Pool({
   host: 'event-io.cxbutbbhppuw.us-east-1.rds.amazonaws.com',
   user: 'bootymage69',
@@ -8,10 +9,28 @@ const pool = new Pool({
   port: 5432
 })
 
+const client = new cassandra.Client({ contactPoints: ['127.0.0.1'], localDataCenter: 'datacenter1' });
+
 const getFollowing = (request, response) => {
 
 
-    const id = request.params.id;
+  const id = request.params.id;
+
+  client.connect()
+  .then(function () {
+    return client.execute('SELECT * FROM test_keyspace.users');
+  })
+  .then(function (result) {
+    const row = result.rows[0];
+    console.log('Obtained row: ', row);
+  })
+  .catch(function (err) {
+    console.error('There was an error when connecting', err);
+    return client.shutdown().then(() => { throw err; });
+  });
+
+
+
 
 
       var query_following =
