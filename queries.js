@@ -21,9 +21,9 @@ const getFollowing = (request, response) => {
     return client.execute('SELECT * FROM test_keyspace.users');
   })
   .then(function (result) {
-    const row = result.rows[0];
+    const row = result.rows;
     console.log('Obtained row: ', row);
-    response.status(200).json(result.row);
+    response.status(200).json(result.rows);
   })
   .catch(function (err) {
     console.error('There was an error when connecting', err);
