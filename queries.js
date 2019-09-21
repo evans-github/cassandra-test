@@ -1,21 +1,17 @@
 
 const cassandra = require('cassandra-driver');
-const WebSocket = require('ws');
+//const WebSocket = require('ws');
+//const ws = new WebSocket('ws://ec2-3-229-137-212.compute-1.amazonaws.com:3000');
 
-const wss = new WebSocket.Server({ port: 8080 });
 
 const client = new cassandra.Client({ contactPoints: ['127.0.0.1'], localDataCenter: 'datacenter1' });
 
+const getStreaming = (request, response) => {
+    console.log('STREAMING BRO');
+    response.status(200).json("IM STREAMING");
+};
+
 const getFollowing = (request, response) => {
-
-  wss.on('connection', function connection(ws) {
-  ws.on('message', function incoming(message) {
-    console.log('received: %s', message);
-    ws.send('I got your message: ' + message);
-  });
-
-
-});
 
 
   const id = request.params.id;
@@ -35,9 +31,13 @@ const getFollowing = (request, response) => {
     return client.shutdown().then(() => { throw err; });
   });
 
+
+
+
 };
 
 
 module.exports = {
-  getFollowing
+  getFollowing,
+  getStreaming
 }

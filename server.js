@@ -13,6 +13,8 @@ app.use(
   })
 )
 
+app.get('/streaming', db.getStreaming)
+
 app.get('/', (request, response) => {
   response.json({ info: 'Node.js, Express, and Postgres API' })
 })
