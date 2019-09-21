@@ -7,7 +7,7 @@ const cassandra = require('cassandra-driver');
 const client = new cassandra.Client({ contactPoints: ['127.0.0.1'], localDataCenter: 'datacenter1' });
 
 const getStreaming = (request, response) => {
-    console.log('STREAMING BRO');
+    console.log('STREAMING BRO TEST 1');
     response.status(200).json("IM STREAMING");
 };
 
