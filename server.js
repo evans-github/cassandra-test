@@ -10,9 +10,9 @@ wss.on('connection', function connection(ws) {
   });
 
   ws.on('close', function(){
-    console.console.log("I lost a client");
+    console.log("I lost a client");
   });
 
-  console.console.log("One more client connected");
-  ws.send('something');
+    console.log("One more client connected");
+  ws.send('Client connected');
 });
