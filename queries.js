@@ -1,13 +1,11 @@
 
 const cassandra = require('cassandra-driver');
-//const WebSocket = require('ws');
-//const ws = new WebSocket('ws://ec2-3-229-137-212.compute-1.amazonaws.com:3000');
 
 
 const client = new cassandra.Client({ contactPoints: ['127.0.0.1'], localDataCenter: 'datacenter1' });
 
 const getStreaming = (request, response) => {
-    console.log('STREAMING BRO TEST 1');
+    console.log('STREAMING BRO TEST 3');
     response.status(200).json("IM STREAMING");
 };
 

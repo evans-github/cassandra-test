@@ -6,25 +6,19 @@ const app = express()
 const db = require('./queries')
 const port = 3000
 
-app.use(bodyParser.json())
-app.use(
-  bodyParser.urlencoded({
-    extended: true,
-  })
-)
+const WebSocket = require('ws');
 
-app.get('/streaming', db.getStreaming)
+const wss = new WebSocket.Server({ port: 3000 });
 
-app.get('/', (request, response) => {
-  response.json({ info: 'Node.js, Express, and Postgres API' })
-})
+wss.on('connection', function connection(ws) {
+  ws.on('message', function incoming(message) {
+    console.log('received: %s', message);
+  });
 
-app.get('/following/:id', db.getFollowing)
-//app.get('/users/:id', db.getUserById)
-//app.post('/users', db.createUser)
-//app.put('/users/:id', db.updateUser)
-//app.delete('/users/:id', db.deleteUser)
+  ws.on('close', function(){
+    console.console.log("I lost a client");
+  });
 
-app.listen(port, () => {
-  console.log(`App running on port ${port}.`)
-})
+  console.console.log("One more client connected");
+  ws.send('something');
+});
